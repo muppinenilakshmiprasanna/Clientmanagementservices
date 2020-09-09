@@ -9,6 +9,8 @@ class CommentInline(admin.TabularInline):
 class VehicleInline(admin.TabularInline):
     model = Vehicle
 
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ('make','model','client','author')
 
 class ClientAdmin(admin.ModelAdmin):
     inlines = [
@@ -23,4 +25,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Comment,CommentAdmin)
-admin.site.register(Vehicle)
+admin.site.register(Vehicle,VehicleAdmin)
