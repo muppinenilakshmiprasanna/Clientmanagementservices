@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Clientss{% endblock title %}
+{% block title %}Clients{% endblock title %}
 
 {% block content %}
   {% for client in object_list %}
@@ -18,19 +18,47 @@
       </div>
       <div class="card-body">
         <p>{{ client.notes }}</p>
-        <a href="{% url 'client_edit' client.pk %}">Edit</a> |
+        <a href="{% url 'client_edit' client.id %}">Edit</a> |
         <a href="{% url 'client_delete' client.pk %}">Delete</a>
+        <br>
+        Vehicles of a client
+        <br>
+        {% for vehicle in client.vehicles.all %}
+        <span class="font-weight-bold">Make:{{ vehicle.make }}</span>
+        <span class="font-weight-bold">Model: {{ vehicle.model }} | </span>
+        <span class="font-weight-bold">VINNumber: {{ vehicle.vinnumber }} | </span>
+        <span class="font-muted">Date of Purchase: {{ vehicle.dateofpurchase }} | </span>
+        <span class="font-muted-">Date of Last Service : {{ vehicle.dateoflastservice }} | </span>
+        <span class="font-muted">Color: {{ vehicle.color }} | </span>
+        <span class="font-muted">Capacity: {{ vehicle.capacity }} | </span>
+        <span class="font-muted">Description: {{ vehicle.description }} | </span>
+      <br>
+        <a href="{% url 'vehicle_edit' pk=vehicle.pk clientPk=client.pk%}">Edit Vehicle</a> |
+        <a href="{% url 'vehicle_delete' pk=vehicle.pk clientPk=client.pk %}">Delete Vehicle</a>
+        {% endfor %}
+        <br>
+        <br>
+          <a href="{% url 'vehicle_new' pk=client.pk %}">
+           <button type="submit" class="btn btn-warning">Add Vehicle</button>
+         </a>
+
       </div>
       <div class="card-footer">
+
         {% for comment in client.comments.all %}
           <p>
             <span class="font-weight-bold">{{ comment.author }} &middot;</span>
             {{ comment }}
           </p>
+
         {% endfor %}
+        <a href="{% url 'comment_new' client.pk %}">
+           <button type="submit" class="btn btn-warning">Add Comment</button>
+         </a>
 
       </div>
     </div>
     <br />
+
   {% endfor %}
 {% endblock content %}

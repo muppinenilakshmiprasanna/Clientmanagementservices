@@ -6,8 +6,35 @@
   <h2>{{ object.name }}</h2>
     <p>by {{ object.author }} | {{ object.date }}</p>
     <p>{{ object.note }}</p>
-  </div>
 
+    {% if client.comments.all|length > 0 %}
+         <p style="color:Red;font-weight:bold">Comments</p>
+  {% for comment in object.comments.all %}
+          <p>
+            <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+            {{ comment }}
+          </p>
+    {% endfor %}
+    {% endif %}
+    <br>
+        {% if client.vehicles.all|length > 0 %}
+        <p style="color:Red;font-weight:bold">Vehicles of a client</p>
+
+        {% for vehicle in client.vehicles.all %}
+        <span class="font-weight-bold">Make:{{ vehicle.make }}</span>
+        <span class="font-weight-bold">Model: {{ vehicle.model }} | </span>
+        <span class="font-weight-bold">VINNumber: {{ vehicle.vinnumber }} | </span>
+        <span class="font-muted">Date of Purchase: {{ vehicle.dateofpurchase }} | </span>
+        <span class="font-muted-">Date of Last Service : {{ vehicle.dateoflastservice }} | </span>
+        <span class="font-muted">Color: {{ vehicle.color }} | </span>
+        <span class="font-muted">Capacity: {{ vehicle.capacity }} | </span>
+        <span class="font-muted">Description: {{ vehicle.description }} | </span>
+      <br>
+
+        {% endfor %}
+    {% endif %}
+  </div>
+<br>
   <p><a href="{% url 'client_edit' client.pk %}">Edit</a> | <a href="{% url 'client_delete' client.pk %}">Delete</a></p>
   <p>Back to <a href="{% url 'client_list' %}">All Clients</a>.</p>
 {% endblock content %}

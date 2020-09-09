@@ -20,14 +20,14 @@ urlpatterns = [
     path('', ClientListView.as_view(), name='client_list'),
 
 #VEHICLES URLS
-   # path('<int:pk>/vehicle/add', VehicleCreateView.as_view(), name='vehicle_new'),
-    #path('<int:clientPk>/vehicle/edit/<int:pk>', VehicleUpdateView.as_view(), name='vehicle_edit'),
-    #path('<int:clientPk>/vehicle/delete/<int:pk>', VehicleDeleteView.as_view(), name='vehicle_delete'),
+    path('<int:pk>/vehicle/add', VehicleCreateView.as_view(), name='vehicle_new'),
+    path('<int:clientPk>/vehicle/edit/<int:pk>', VehicleUpdateView.as_view(), name='vehicle_edit'),
+    path('<int:clientPk>/vehicle/delete/<int:pk>', VehicleDeleteView.as_view(), name='vehicle_delete'),
 
     #comments urls
-    #path('<int:clientPk>/comment/add', CommentCreateView.as_view(), name='comment_new'),
-    #path('<int:clientPk>/comment/edit/<int:pk>', CommentUpdateView.as_view(), name='comment_edit'),
-    #path('<int:clientPk>/comment/delete/<int:pk>', CommentDeleteView.as_view(), name='comment_delete'),
+    path('<int:pk>/comment/add', CommentCreateView.as_view(), name='comment_new'),
+    path('<int:clientPk>/comment/edit/<int:pk>', CommentUpdateView.as_view(), name='comment_edit'),
+    path('<int:clientPk>/comment/delete/<int:pk>', CommentDeleteView.as_view(), name='comment_delete'),
 
 
     ]
